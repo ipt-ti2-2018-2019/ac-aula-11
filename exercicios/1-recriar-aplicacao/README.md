@@ -2,5 +2,5 @@
 
 A aplicação pode ser:
 
--   API Todos
--   Aplicação dos agentes
+-   API Todos (https://github.com/ipt-ti2-2018-2019/TodoApiAjax)
+-   Aplicação dos agentes/multas (https://github.com/ipt-ti2-2018-2019/3a-Multas)
