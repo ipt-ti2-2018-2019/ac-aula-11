@@ -1,0 +1,11 @@
+@using HelloAspNetCore.Data;
+@model List<Todo>
+
+<p>Tens @Model.Count tarefas!</p>
+
+<ul>
+    @foreach (var todo in Model)
+    {
+        <li>@todo.Description</li>
+    }
+</ul>
