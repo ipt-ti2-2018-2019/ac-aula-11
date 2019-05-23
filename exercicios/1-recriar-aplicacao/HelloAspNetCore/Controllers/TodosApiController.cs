@@ -8,6 +8,7 @@ namespace HelloAspNetCore.Controllers
     {
         private ApplicationDbContext db;
 
+        // o ASP.NET core "dá-nos a BD" no construtor.
         public TodosApiController(ApplicationDbContext db)
         {
             this.db = db;

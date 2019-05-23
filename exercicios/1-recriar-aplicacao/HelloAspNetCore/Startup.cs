@@ -43,11 +43,28 @@ namespace HelloAspNetCore
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            // Adicionar a classe do "Seeder" para estar disponível
+            services.AddTransient<DbSeeder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Fazer o seed da base de dados.
+            // Precisamos do "scope" por causa da base de dados,
+            // a BD é um serviço "scoped".
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                // Obter a classe do seeder através de Dependency Injection
+                // Atenção que o services.AddTransient<DbSeeder>(); no
+                // ConfigureServices é obrigatório, caso contrário esta linha
+                // rebenta a dizer que não encontra o serviço.
+                var seeder = scope.ServiceProvider.GetRequiredService<DbSeeder>();
+                // Executar o seed.
+                seeder.Seed();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
